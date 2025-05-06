@@ -12,7 +12,7 @@ import com.hmdm.HeadwindMDM;
 
 public class MainActivity extends AppCompatActivity implements HeadwindMDM.EventHandler {
 
-    private String API_KEY = "c4Bz60gRwz";
+    private String API_KEY = "changeme-8gzk321W";
     private TextView infoView;
     private Button updateConfigButton;
 
