@@ -1,6 +1,7 @@
 package com.hmdm.libtest;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements HeadwindMDM.Event
     private String API_KEY = "c4Bz60gRwz";
     private TextView infoView;
     private Button updateConfigButton;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements HeadwindMDM.Event
         String imei = HeadwindMDM.getInstance().getImei();
         int version = HeadwindMDM.getInstance().getVersion();
         Log.d("com.hmdm.libtest", "Got a device ID: " + deviceId);
-        infoView.setText("Version: " + version + "\n" +
+        infoView.setText("Library version: " + version + "\n" +
                 "Device ID: " + deviceId + "\n" +
                 "IMEI: " + imei + "\n");
     }
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements HeadwindMDM.Event
 
     @Override
     public void onHeadwindMDMConfigChanged() {
-
+        handler.post(() -> {
+            Toast.makeText(MainActivity.this, "Configuration updated", Toast.LENGTH_LONG).show();
+        });
     }
 }
