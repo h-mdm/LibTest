@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hmdm.HeadwindMDM;
+import com.hmdm.MDMService;
 
 public class MainActivity extends AppCompatActivity implements HeadwindMDM.EventHandler {
 
@@ -51,10 +52,15 @@ public class MainActivity extends AppCompatActivity implements HeadwindMDM.Event
         String deviceId = HeadwindMDM.getInstance().getDeviceId();
         String imei = HeadwindMDM.getInstance().getImei();
         int version = HeadwindMDM.getInstance().getVersion();
+        String param = MDMService.Preferences.get("libtest", null);
         Log.d("com.hmdm.libtest", "Got a device ID: " + deviceId);
-        infoView.setText("Library version: " + version + "\n" +
+        String text = "Library version: " + version + "\n" +
                 "Device ID: " + deviceId + "\n" +
-                "IMEI: " + imei + "\n");
+                "IMEI: " + imei + "\n";
+        if (param != null) {
+            text += "Param: " + param + "\n";
+        }
+        infoView.setText(text);
     }
 
     @Override
